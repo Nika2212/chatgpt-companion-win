@@ -1,0 +1,47 @@
+{
+  "name": "chatgpt-companion",
+  "productName": "ChatGPT Companion",
+  "version": "1.0.0",
+  "description": "Small frameless translucent window with ChatGPT Temporary Chat",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable",
+    "build:dir": "electron-builder --win --dir"
+  },
+  "build": {
+    "appId": "com.local.chatgpt-companion",
+    "productName": "ChatGPT Companion",
+    "files": [
+      "main.js",
+      "package.json",
+      "assets/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "icon": "assets/icon.png",
+    "win": {
+      "icon": "assets/icon.png",
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.3.0",
+    "electron-builder": "^26.18.0"
+  }
+}
