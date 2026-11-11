@@ -1,3 +1,8 @@
 /node_modules
 /dist
+/dist-rebuilt
+/dist-portable
+/dist-portable-updated
+/.portable-build
+/build
 .idea

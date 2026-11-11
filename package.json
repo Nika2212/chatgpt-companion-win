@@ -3,17 +3,24 @@
   "productName": "ChatGPT Companion",
   "version": "1.0.0",
   "description": "Small frameless translucent window with ChatGPT Temporary Chat",
-  "main": "main.js",
+  "main": "build/main.js",
   "scripts": {
+    "compile": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run compile",
     "start": "electron .",
+    "prebuild": "npm run compile",
     "build": "electron-builder --win",
-    "build:portable": "electron-builder --win portable",
+    "prebuild:portable": "npm run compile",
+    "build:portable": "node scripts/build-portable.js",
+    "prebuild:dir": "npm run compile",
     "build:dir": "electron-builder --win --dir"
   },
   "build": {
     "appId": "com.local.chatgpt-companion",
     "productName": "ChatGPT Companion",
     "files": [
+      "build/**/*",
       "main.js",
       "package.json",
       "assets/**"
@@ -25,23 +32,18 @@
     "win": {
       "icon": "assets/icon.png",
       "target": [
-        "nsis",
         "portable"
       ],
       "signExecutable": false
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
     },
     "portable": {
       "artifactName": "${productName}-${version}-portable.${ext}"
     }
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
     "electron": "^45.3.0",
-    "electron-builder": "^26.18.0"
+    "electron-builder": "^26.18.0",
+    "typescript": "^7.0.2"
   }
 }
